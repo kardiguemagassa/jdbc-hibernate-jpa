@@ -2,6 +2,7 @@ package com.company.tennis.core;
 
 import com.company.tennis.core.entity.Joueur;
 import com.company.tennis.core.repository.JoueurRepositoryImpl;
+import com.company.tennis.core.service.JoueurService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +10,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        JoueurRepositoryImpl joueurRepository = new JoueurRepositoryImpl();
+        JoueurService joueurService = new JoueurService();
 
-        List<Joueur> liste = joueurRepository.list();
+        List<Joueur> liste = joueurService.list();
         for (Joueur joueur : liste) {
             System.out.println(joueur.getPrenom() + " : " + joueur.getNom());
         }
 
        /*
-        Joueur joueur = joueurRepository.getById(10L);
+        Joueur joueur = joueurService.getById(10L);
         System.out.println(joueur.getNom() + " " + joueur.getPrenom());
         System.out.println();*/
 
@@ -25,15 +26,15 @@ public class Main {
         noah.setNom("Noah");
         noah.setPrenom("Yannik 1");
         noah.setSexe('H');
-        joueurRepository.create(noah);
+        joueurService.create(noah);
         //System.out.println(noah.getNom() + " " + noah.getPrenom());
         System.out.println("Id du Joueur créée : " + noah.getId());*/
 
-        /*Joueur noahamodifier = joueurRepository.getById(44L);
+        /*Joueur noahamodifier = joueurService.getById(44L);
         noahamodifier.setPrenom("Yannick");
         joueurRepository.update(noahamodifier);*/
 
-        //joueurRepository.delete(47L);
+        //joueurService.delete(47L);
 
 
 
