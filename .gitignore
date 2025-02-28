@@ -1,0 +1,27 @@
+# Fichiers MacOS inutiles
+.DS_Store
+
+# Dossier IntelliJ
+.idea/
+
+# Build output
+**/target/
+**/out/
+**/build/
+
+# Fichiers logs ou temporaires
+*.log
+*.tmp
+
+# Fichiers système
+Thumbs.db
+
+# Si tu utilises Maven
+**/target/
+
+# Si tu utilises Gradle (au cas où)
+.gradle/
+build/
+
+# Cache spécifique à IntelliJ (facultatif)
+*.iml
