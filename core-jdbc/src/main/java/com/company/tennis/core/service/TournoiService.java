@@ -13,11 +13,11 @@ public class TournoiService {
         tournoiRepositoryimpl = new TournoiRepositoryImpl();
     }
 
-    public void createTournoi(Tournoi tournoi) {
+    /*public void createTournoi(Tournoi tournoi) {
         tournoiRepositoryimpl.create(tournoi);
     }
 
     public Tournoi getTournoi(Long id) {
         return tournoiRepositoryimpl.getById(id);
-    }
+    }*/
 }

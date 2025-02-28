@@ -12,10 +12,10 @@ public class DataSourceProvider {
         if (singleDataSource==null){
             singleDataSource=new BasicDataSource();
             singleDataSource.setInitialSize(5);
-            singleDataSource.setUrl("jdbc:mysql://localhost:3306/tennis?useSSL=false");
+            singleDataSource.setUrl("jdbc:mysql://localhost:3306/jnesis_tennis?useSSL=false");
 
-            singleDataSource.setUsername("root");
-            singleDataSource.setPassword("mhd02042017");
+            singleDataSource.setUsername("jnesis");
+            singleDataSource.setPassword("jnesis");
         }
         return singleDataSource;
     }

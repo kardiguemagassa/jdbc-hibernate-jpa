@@ -8,15 +8,16 @@ public class TravauxPratiques {
 
     public static void main(String... args){
 
-        /*
+
+
         // Read list
         TournoiRepositoryImpl tournoiRepository = new TournoiRepositoryImpl();
         tournoiRepository.list().stream()
                 .forEach(tournoi -> System.out.println("Tourmoi numéro "
-                        + tournoi.getId() + "nom: " + tournoi.getNom()
+                        + tournoi.getId() + " nom: " + tournoi.getNom()
                         +"code: " + tournoi.getCode())
                 );
-         */
+
 
         /*
         // Create
