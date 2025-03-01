@@ -21,10 +21,13 @@ public class TournoiRepositoryImpl {
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
 
+            conn.setAutoCommit(false);
+
             PreparedStatement preparedStatement = conn.prepareStatement("SELECT ID,NOM,CODE FROM TOURNOI");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             System.out.println("Tournois lus");
+            conn.commit();
 
             while (resultSet.next()) {
                 Tournoi tournoi = new Tournoi();
@@ -62,6 +65,7 @@ public class TournoiRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("select NOM,CODE FROM TOURNOI WHERE ID=?");
             preparedStatement.setLong(1, id);
@@ -76,6 +80,7 @@ public class TournoiRepositoryImpl {
             }
 
             System.out.println("Tournoi lu");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,6 +109,7 @@ public class TournoiRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO TOURNOI (NOM,CODE) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, tournoi.getNom());
@@ -118,6 +124,7 @@ public class TournoiRepositoryImpl {
             }
 
             System.out.println("Tournoi créé");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,6 +152,7 @@ public class TournoiRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE TOURNOI SET NOM=?,CODE=? WHERE ID=?");
             preparedStatement.setString(1, tournoi.getNom());
@@ -154,6 +162,7 @@ public class TournoiRepositoryImpl {
             preparedStatement.executeUpdate();
 
             System.out.println("Tournoi modifié");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -181,6 +190,7 @@ public class TournoiRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM TOURNOI  WHERE ID=?");
 
@@ -189,6 +199,7 @@ public class TournoiRepositoryImpl {
             preparedStatement.executeUpdate();
 
             System.out.println("Tournoi supprimé");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
