@@ -1,3 +1,4 @@
+/*
 package com.mycompany.tennis.core.repository;
 
 import com.mycompany.tennis.core.HibernateUtil;
@@ -30,3 +31,4 @@ public class JoueurRepositoryImpl {
         return joueur;
     }
 }
+*/

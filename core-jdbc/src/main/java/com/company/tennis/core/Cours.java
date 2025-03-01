@@ -7,7 +7,6 @@ import com.company.tennis.core.entity.Score;
 import com.company.tennis.core.service.JoueurService;
 import com.company.tennis.core.service.MatchService;
 
-import java.util.List;
 
 public class Cours {
     public static void main(String[] args) {

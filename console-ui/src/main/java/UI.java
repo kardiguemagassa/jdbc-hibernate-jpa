@@ -1,9 +1,11 @@
-import com.mycompany.tennis.core.entity.Joueur;
+
+import com.mycompany.tennis.controller.JoueurController;
 
 public class UI {
 
     public static void main(String[] args) {
 
-        Joueur joueur = new Joueur();
+        JoueurController joueurController = new JoueurController();
+        joueurController.afficherJoueur();
     }
 }
