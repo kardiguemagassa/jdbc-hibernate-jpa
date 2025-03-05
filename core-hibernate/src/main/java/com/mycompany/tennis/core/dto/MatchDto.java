@@ -1,15 +1,13 @@
 package com.mycompany.tennis.core.dto;
 
-import com.mycompany.tennis.core.entity.Epreuve;
-import com.mycompany.tennis.core.entity.Joueur;
-import com.mycompany.tennis.core.entity.Score;
-
 public class MatchDto {
     private Long id;
     private JoueurDto vainqueur;
     private JoueurDto finaliste;
+
     private EpreuveFullDto epreuve;
     private ScoreFullDto score;
+
     public Long getId() {
         return id;
     }

@@ -1,0 +1,41 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jnesis_tennis?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Paris&amp;allowPublicKeyRetrieval=true</property>
+        <property name="hibernate.connection.username">jnesis</property>
+        <property name="hibernate.connection.password">jnesis</property>
+
+        <!-- Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <!-- dbcp connection pool configuration -->
+        <property name="hibernate.dbcp.initialSize">5</property>
+        <!-- Uncomment and adjust if you want to configure more dbcp properties -->
+        <!--<property name="hibernate.dbcp.maxTotal">20</property>-->
+        <property name="hibernate.dbcp.maxIdle">10</property>
+        <property name="hibernate.dbcp.minIdle">5</property>
+        <property name="hibernate.dbcp.maxWaitMillis">-1</property>
+
+        <!-- Show SQL queries in the console -->
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Current session context -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Schema management -->
+        <!-- Set to 'update' for auto schema update (you can use 'create' for new DB creation) -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+
+        <!-- Entity mappings -->
+        <mapping class="com.mycompany.tennis.core.entity.Joueur" />
+        <mapping class="com.mycompany.tennis.core.entity.Tournoi" />
+        <mapping class="com.mycompany.tennis.core.entity.Epreuve" />
+        <mapping class="com.mycompany.tennis.core.entity.Score" />
+        <mapping class="com.mycompany.tennis.core.entity.Match" />
+    </session-factory>
+</hibernate-configuration>

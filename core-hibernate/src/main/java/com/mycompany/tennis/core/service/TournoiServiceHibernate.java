@@ -1,13 +1,21 @@
-package com.mycompany.tennis.core.repository;
+package com.mycompany.tennis.core.service;
 
 import com.mycompany.tennis.core.HibernateUtil;
+import com.mycompany.tennis.core.dto.TournoiDto;
 import com.mycompany.tennis.core.entity.Tournoi;
+import com.mycompany.tennis.core.repository.TournoiRepositoryImpl;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class TournoiRepositoryImpl {
+public class TournoiServiceHibernate {
+
+    private final TournoiRepositoryImpl tournoiRepositoryImpl;
+
+    public TournoiServiceHibernate() {
+        this.tournoiRepositoryImpl = new TournoiRepositoryImpl();
+    }
 
 
     public List<Tournoi> list() {
@@ -18,7 +26,7 @@ public class TournoiRepositoryImpl {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            tournois = session.createQuery("from Tournoi", Tournoi.class).list();
+            tournois = tournoiRepositoryImpl.list();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -30,19 +38,24 @@ public class TournoiRepositoryImpl {
                 session.close();
             }
         }
+
         return tournois;
     }
 
 
-    public Tournoi getById(Long id) {
+    public TournoiDto getById(Long id) {
         Session session = null;
         Transaction tx = null;
         Tournoi tournoi = null;
+        TournoiDto tournoiDto = null;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            tournoi = session.find(Tournoi.class, id);
+            tournoi = tournoiRepositoryImpl.getById(id);
+            tournoiDto = new TournoiDto();
+            tournoiDto.setId(tournoi.getId());
+            tournoiDto.setNom(tournoi.getNom());
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -54,18 +67,23 @@ public class TournoiRepositoryImpl {
                 session.close();
             }
         }
-        return tournoi;
+
+        return tournoiDto;
     }
 
 
-    public void create(Tournoi tournoi) {
+    public void create(TournoiDto tournoiDto) {
         Session session = null;
         Transaction tx = null;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.persist(tournoi);
+            Tournoi tournoi = new Tournoi();
+            tournoi.setId(tournoiDto.getId());
+            tournoi.setNom(tournoiDto.getNom());
+            tournoi.setCode(tournoiDto.getCode());
+            tournoiRepositoryImpl.create(tournoi);
             tx.commit();
             System.out.println("Tournoi ajouté");
         } catch (Exception e) {
@@ -81,14 +99,20 @@ public class TournoiRepositoryImpl {
     }
 
 
-    public void update(Tournoi tournoi) {
+    public void update(TournoiDto tournoiDto) {
         Session session = null;
         Transaction tx = null;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            session.update(tournoi);
+
+            Tournoi tournoi = new Tournoi();
+            tournoi.setId(tournoiDto.getId());
+            tournoi.setNom(tournoiDto.getNom());
+            tournoi.setCode(tournoiDto.getCode());
+            tournoiRepositoryImpl.update(tournoi);
+
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -110,14 +134,9 @@ public class TournoiRepositoryImpl {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            Tournoi tournoi = getById(id);
-            if (tournoi != null) {
-                session.delete(tournoi);
-                tx.commit();
-                System.out.println("Tournoi supprimé");
-            } else {
-                System.out.println("Tournoi non trouvé.");
-            }
+            tournoiRepositoryImpl.delete(id);
+            tx.commit();
+            System.out.println("Tournoi supprimé");
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();

@@ -1,9 +1,5 @@
 package com.mycompany.tennis.core.dto;
 
-
-//import javax.persistence.*;
-
-
 public class JoueurDto {
     private Long id;
     private  String nom;
