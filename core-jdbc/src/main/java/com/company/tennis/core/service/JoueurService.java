@@ -7,7 +7,8 @@ import java.util.List;
 
 public class JoueurService {
 
-    private JoueurRepositoryImpl joueurRepositoryimpl;
+    private final JoueurRepositoryImpl joueurRepositoryimpl;
+
 
     public JoueurService() {
         this.joueurRepositoryimpl = new JoueurRepositoryImpl();
