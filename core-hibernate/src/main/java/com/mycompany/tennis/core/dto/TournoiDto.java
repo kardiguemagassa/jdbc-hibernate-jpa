@@ -1,13 +1,8 @@
 package com.mycompany.tennis.core.dto;
 
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class TournoiDto {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     private Long id;
     private String nom;
     private String code;

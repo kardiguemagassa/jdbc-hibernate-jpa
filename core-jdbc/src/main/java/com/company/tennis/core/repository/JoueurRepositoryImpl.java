@@ -20,11 +20,13 @@ public class JoueurRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("SELECT ID,NOM,PRENOM,SEXE FROM JOUEUR");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             System.out.println("Joueurs lus");
+            conn.commit();
 
             while (resultSet.next()) {
                 Joueur joueur = new Joueur();
@@ -63,6 +65,7 @@ public class JoueurRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("select NOM,PRENOM,SEXE FROM JOUEUR WHERE ID=?");
             preparedStatement.setLong(1, id);
@@ -77,6 +80,7 @@ public class JoueurRepositoryImpl {
             }
 
             System.out.println("Joueur lu");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,6 +109,7 @@ public class JoueurRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO JOUEUR (NOM,PRENOM,SEXE) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, joueur.getNom());
@@ -120,6 +125,7 @@ public class JoueurRepositoryImpl {
             }
 
             System.out.println("Joueur créé");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,6 +153,7 @@ public class JoueurRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE JOUEUR SET NOM=?,PRENOM=?,SEXE=? WHERE ID=?");
             preparedStatement.setString(1, joueur.getNom());
@@ -157,6 +164,7 @@ public class JoueurRepositoryImpl {
             preparedStatement.executeUpdate();
 
             System.out.println("Joueur modifié");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -184,6 +192,7 @@ public class JoueurRepositoryImpl {
 
             DataSource dataSource =  DataSourceProvider.getSingleDataSourceInstance();
             conn=dataSource.getConnection();
+            conn.setAutoCommit(false);
 
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM JOUEUR  WHERE ID=?");
 
@@ -192,6 +201,7 @@ public class JoueurRepositoryImpl {
             preparedStatement.executeUpdate();
 
             System.out.println("Joueur supprimé");
+            conn.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
