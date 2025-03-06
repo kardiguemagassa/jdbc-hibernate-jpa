@@ -7,6 +7,7 @@ import com.mycompany.tennis.core.entity.Joueur;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -14,22 +15,18 @@ public class JoueurRepositoryImpl {
 
     public JoueurRepositoryImpl() {}
 
-    public List<Joueur> list() {
+    public List<Joueur> list(char sexe) {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-        List<Joueur> joueurs = null;
-        try {
-            tx = session.beginTransaction();
-            joueurs = session.createQuery("from Joueur", Joueur.class).list(); // Spécifier le type
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        //Query<Joueur> query = session.createQuery("select j from Joueur j where j.sexe = :sexe", Joueur.class);
+       //query.setParameter("sexe", sexe);
+
+        // utilisation de nameQuery
+        Query<Joueur> query = session.createNamedQuery("given_sexe", Joueur.class);
+        query.setParameter("sexe", sexe);
+
+        List<Joueur> joueurs = query.getResultList();
+        System.out.println("Joueurs lus");
         return joueurs;
     }
 

@@ -1,71 +1,101 @@
 package com.mycompany.tennis.controller;
 
-import com.mycompany.tennis.core.entity.Tournoi;
-import com.mycompany.tennis.core.service.TournoiServiceHibernate;
+import com.mycompany.tennis.core.dto.ScoreFullDto;
+import com.mycompany.tennis.core.entity.Score;
+import com.mycompany.tennis.core.service.ScoreServiceHibernate;
+
 import java.util.Scanner;
 
-public class TournoiControllerHibernate {
+public class ScoreControllerHibernate {
 
-    private TournoiServiceHibernate tournoiServiceHibernate;
+    private ScoreServiceHibernate scoreServiceHibernate;
     private Scanner scanner;
 
-    public TournoiControllerHibernate() {
-        tournoiServiceHibernate = new TournoiServiceHibernate();
+    public ScoreControllerHibernate() {
+        scoreServiceHibernate = new ScoreServiceHibernate();
         scanner = new Scanner(System.in);  // Initialisation du scanner
     }
 
-    public void afficherTournoiHibernate() {
-        System.out.println("Quel est l'identifiant du Tournoi dont vous voulez afficher les informations ?");
+    public void afficherScoreHibernate() {
+        System.out.println("Quel est l'identifiant du Score dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
-        scanner.nextLine();  // Consommer le newline après nextLong
-        Tournoi tournoi = tournoiServiceHibernate.getById(id);
-        if (tournoi != null) {
-            System.out.println(String.format("Le tournoi sélectionné s'appelle %s avec le code %s", tournoi.getNom(), tournoi.getCode()));
+        scanner.nextLine();
+        ScoreFullDto scoreFullDto = scoreServiceHibernate.getByScore(id);
+        if (scoreFullDto != null) {
+            System.out.println("Les sets du score : ");
+            System.out.println("Set 1 : " + scoreFullDto.getSet1());
+            System.out.println("Set 2 : " + scoreFullDto.getSet2());
+            if (scoreFullDto.getSet3() != null) {
+                System.out.println("Set 3 : " + scoreFullDto.getSet3());
+            }
+            if (scoreFullDto.getSet4() != null) {
+                System.out.println("Set 4 : " + scoreFullDto.getSet4());
+            }
+            if (scoreFullDto.getSet5() != null) {
+                System.out.println("Set 5 : " + scoreFullDto.getSet5());
+            }
         } else {
-            System.out.println("Tournoi non trouvé.");
+            System.out.println("Score non trouvé.");
         }
+        System.out.println("Il s'agit du tournoi "+scoreFullDto.getMatch().getEpreuve().getTournoi().getNom());
+        System.out.println("L'epreuve s'est déroulée en "+ scoreFullDto.getMatch().getEpreuve().getAnnee() + " et il s'agit d'une épreuve "
+                + (scoreFullDto.getMatch().getEpreuve().getTypeEpreuve().charValue() == 'H' ? "Homme" : "Femme"));
     }
 
-    public void creerTournoiHibernate() {
-        System.out.println("Quel est le nom du tournoi ?");
-        String nom = scanner.nextLine();
-        System.out.println("Quel est le code du tournoi ?");
-        String code = scanner.nextLine();
+    public void creerScoreHibernate() {
+        System.out.println("Quel est le score pour Set 1 ?");
+        Byte set1 = scanner.nextByte();
+        System.out.println("Quel est le score pour Set 2 ?");
+        Byte set2 = scanner.nextByte();
+        System.out.println("Quel est le score pour Set 3 ?");
+        Byte set3 = scanner.nextByte();
+        System.out.println("Quel est le score pour Set 4 ?");
+        Byte set4 = scanner.nextByte();
+        System.out.println("Quel est le score pour Set 5 ?");
+        Byte set5 = scanner.nextByte();
+        scanner.nextLine(); // Consommer la ligne restante
 
-        Tournoi tournoi = new Tournoi();
-        tournoi.setNom(nom);
-        tournoi.setCode(code);
-        tournoiServiceHibernate.create(tournoi);
-        System.out.println("Le tournoi a été créé avec succès.");
+        //Score score = new Score(set1, set2, set3, set4, set5, null); // Remplacez `null` par un objet `Match` si nécessaire
+        Score score = new Score();
+        scoreServiceHibernate.create(score);
+        System.out.println("Le score a été créé avec succès.");
     }
 
-    public void renommeTournoiHibernate() {
-        System.out.println("Quel est l'identifiant du tournoi que vous voulez renommer ?");
+    /*public void renommeScoreHibernate() {
+        System.out.println("Quel est l'identifiant du score que vous voulez renommer ?");
         long id = scanner.nextLong();
         scanner.nextLine();  // Consommer le newline après nextLong
-        System.out.println("Quel est le nouveau nom ?");
-        String nom = scanner.nextLine();
 
-        Tournoi tournoi = tournoiServiceHibernate.getById(id);
-        if (tournoi != null) {
-            tournoi.setNom(nom);  // Modifier le nom du tournoi
-            tournoiServiceHibernate.update(tournoi);  // Sauvegarder la mise à jour
-            System.out.println("Le tournoi a été renommé avec succès.");
+        Score score = scoreServiceHibernate.getByScore(id);
+        if (score != null) {
+            System.out.println("Quels sont les nouveaux scores ?");
+            System.out.println("Set 1 : ");
+            score.setSet1(scanner.nextByte());
+            System.out.println("Set 2 : ");
+            score.setSet2(scanner.nextByte());
+            System.out.println("Set 3 : ");
+            score.setSet3(scanner.nextByte());
+            System.out.println("Set 4 : ");
+            score.setSet4(scanner.nextByte());
+            System.out.println("Set 5 : ");
+            score.setSet5(scanner.nextByte());
+            scanner.nextLine();  // Consommer la ligne restante
+            scoreServiceHibernate.update(score);  // Mettre à jour le score
+            System.out.println("Le score a été mis à jour avec succès.");
         } else {
-            System.out.println("Tournoi non trouvé.");
+            System.out.println("Score non trouvé.");
         }
-    }
+    }*/
 
-    public void supprimeTournoiHibernate() {
-        System.out.println("Quel est l'identifiant du tournoi à supprimer ?");
+    public void supprimeScoreHibernate() {
+        System.out.println("Quel est l'identifiant du score à supprimer ?");
         long id = scanner.nextLong();
         scanner.nextLine();  // Consommer le newline après nextLong
 
-        tournoiServiceHibernate.delete(id);
-        System.out.println("Le tournoi a été supprimé avec succès.");
+        scoreServiceHibernate.delete(id);
+        System.out.println("Le score a été supprimé avec succès.");
     }
 
-    // Optionnel : Vous pouvez ajouter une méthode pour fermer le scanner
     public void closeScanner() {
         if (scanner != null) {
             scanner.close();

@@ -6,9 +6,22 @@ import com.mycompany.tennis.core.entity.Epreuve;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 
 public class EpreuveRepositoryImpl {
+
+    //HQL
+    public List<Epreuve> list(String codeTournoi) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Epreuve> query = session.createQuery("select e from Epreuve e join fetch e.tournoi where e.tournoi.code =:codeTournoi", Epreuve.class);
+        query.setParameter("codeTournoi", codeTournoi);
+        List<Epreuve> epreuves = query.getResultList();
+        System.out.println("Epreuves lus");
+        return epreuves;
+    }
 
 
     public Epreuve getById(Long id) {
