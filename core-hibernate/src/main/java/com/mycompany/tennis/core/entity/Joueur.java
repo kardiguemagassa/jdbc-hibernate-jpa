@@ -2,8 +2,8 @@ package com.mycompany.tennis.core.entity;
 
 import javax.persistence.*;
 
-//@NamedQuery(query = "select j from Joueur j where j.sexe=?1", name = "given_sexe")
-//@NamedQuery(query = "select j from Joueur j where j.sexe=?1", name = "given_nom")
+@NamedQuery(query = "select j from Joueur j where j.sexe=:sexe", name = "given_sexe")
+@NamedQuery(query = "select j from Joueur j where j.nom=?1", name = "given_nom")
 @Entity
 @Table(name="JOUEUR")
 public class Joueur {

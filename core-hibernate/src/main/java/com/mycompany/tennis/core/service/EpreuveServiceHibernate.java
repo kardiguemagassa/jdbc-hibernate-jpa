@@ -13,6 +13,7 @@ import com.mycompany.tennis.core.repository.EpreuveRepositoryImpl;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -24,15 +25,30 @@ public class EpreuveServiceHibernate {
         this.epreuveRepositoryImpl = new EpreuveRepositoryImpl();
     }
 
-    public List<Tournoi> list() {
+    public List<EpreuveFullDto> getListEpreuve(String codeTournoi) {
         Session session = null;
         Transaction tx = null;
-        List<Tournoi> tournois = null;
+        List<EpreuveFullDto> epreuveFullDtos = new ArrayList<>();
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-           // tournois = tournoiRepositoryImpl.list();  // Retourner la liste récupérée depuis le repository
+            List<Epreuve> epreuves = epreuveRepositoryImpl.list(codeTournoi);
+
+            for (Epreuve epreuve : epreuves) {
+                final EpreuveFullDto epreuveFullDto = new EpreuveFullDto();
+                epreuveFullDto.setId(epreuve.getId());
+                epreuveFullDto.setAnnee(epreuve.getAnnee());
+                epreuveFullDto.setTypeEpreuve(epreuve.getTypeEpreuve());
+                TournoiDto tournoiDto = new TournoiDto();
+                tournoiDto.setId(epreuve.getTournoi().getId());
+                tournoiDto.setNom(epreuve.getTournoi().getNom());
+                tournoiDto.setCode(epreuve.getTournoi().getCode());
+                epreuveFullDto.setTournoi(tournoiDto);
+                epreuveFullDtos.add(epreuveFullDto);
+            }
+
+
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -41,11 +57,10 @@ public class EpreuveServiceHibernate {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();  // Fermeture de la session
+                session.close();
             }
         }
-
-        return tournois;
+        return epreuveFullDtos;
     }
 
 
