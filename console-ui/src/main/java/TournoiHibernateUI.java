@@ -7,7 +7,7 @@ public class TournoiHibernateUI {
         TournoiControllerHibernate tournoiControllerHibernate = new TournoiControllerHibernate();
 
        tournoiControllerHibernate.afficherTournoiHibernate();
-        //tournoiControllerHibernate.creerTournoiHibernate();
+       //tournoiControllerHibernate.creerTournoiHibernate();
         //tournoiControllerHibernate.supprimeTournoiHibernate();
 
     }
