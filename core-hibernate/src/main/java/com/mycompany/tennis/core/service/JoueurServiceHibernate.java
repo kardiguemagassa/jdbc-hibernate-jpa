@@ -44,10 +44,9 @@ public class JoueurServiceHibernate {
                 joueurDtoList.add(joueurDto);
             }
 
-
             tx.commit();
         } catch (Exception e) {
-            if (tx != null) {
+            if (tx != null && tx.isActive()) {
                 tx.rollback();
             }
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.mycompany.tennis.webui.controller;
 
 import com.mycompany.tennis.core.dto.JoueurDto;
+import com.mycompany.tennis.core.service.JoueurServiceHibernate;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,19 +16,17 @@ import java.util.List;
 @WebServlet("/listes")
 public class ListeJoueursServlet extends HttpServlet {
 
-    private JoueurService joueurService;
-
+    private JoueurServiceHibernate joueurServiceHibernate;
 
     public ListeJoueursServlet() {
-        this.joueurService = new JoueurService();
+        this.joueurServiceHibernate = new JoueurServiceHibernate();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<JoueurDto> listeHommes = joueurService.getListeJoueurs('H');
-        List<JoueurDto> listeFemmes = joueurService.getListeJoueurs('F');
-        //afficheListeJoueurs
+        List<JoueurDto> listeHommes = joueurServiceHibernate.getListJoueurs('H');
+        List<JoueurDto> listeFemmes = joueurServiceHibernate.getListJoueurs('F');
 
         request.setAttribute("listeHommes",listeHommes);
         request.setAttribute("listeFemmes",listeFemmes);
