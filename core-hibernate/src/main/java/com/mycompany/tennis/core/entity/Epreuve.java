@@ -22,14 +22,17 @@ public class Epreuve {
     @Column(name = "TYPE_EPREUVE")
     private Character typeEpreuve;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "PARTICIPANTS",
             joinColumns = {@JoinColumn(name = "ID_EPREUVE")},
             inverseJoinColumns = {@JoinColumn(name = "ID_JOUEUR")}
     )
-
     private Set<Joueur> participants;
+
+    public void setEpruve(Character typeEpreuve) {
+        this.typeEpreuve = typeEpreuve;
+    }
 
     public Long getId() {
         return id;

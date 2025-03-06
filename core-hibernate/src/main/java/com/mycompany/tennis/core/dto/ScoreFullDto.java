@@ -1,7 +1,5 @@
 package com.mycompany.tennis.core.dto;
 
-import com.mycompany.tennis.core.entity.Match;
-
 public class ScoreFullDto {
 
     private Long id;
