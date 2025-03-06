@@ -14,8 +14,9 @@ import java.util.List;
 
 @WebServlet("/listes")
 public class ListeJoueursServlet extends HttpServlet {
-    /*
+
     private JoueurService joueurService;
+
 
     public ListeJoueursServlet() {
         this.joueurService = new JoueurService();
@@ -36,6 +37,4 @@ public class ListeJoueursServlet extends HttpServlet {
 
         //http://localhost:8080/webui/listes
     }
-
-     */
 }
