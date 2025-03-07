@@ -2,7 +2,6 @@ package com.mycompany.tennis.controller;
 
 import com.company.tennis.core.entity.Joueur;
 import com.company.tennis.core.service.JoueurService;
-import com.mycompany.tennis.core.dto.JoueurDto;
 
 import java.util.Scanner;
 

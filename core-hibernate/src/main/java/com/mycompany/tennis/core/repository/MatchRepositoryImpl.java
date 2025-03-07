@@ -11,69 +11,45 @@ import java.util.List;
 public class MatchRepositoryImpl {
 
     public List<Match> list() {
-        Session session = null;
-        List<Match> tournois = null;
 
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tournois = session.createQuery("FROM Tournoi", Match.class).getResultList(); // Récupérer tous les tournois
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        List<Match> tournois = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        tournois = session.createQuery("FROM Tournoi", Match.class).getResultList(); // Récupérer tous les tournois
 
         return tournois;
     }
 
     public Match getById(Long id) {
-        Session session = null;
-        Transaction tx = null;
+
         Match match = null;
 
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
 
-            // Requête HQL pour récupérer le match avec ses associations
-            match = session.get(Match.class, id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        //tx = session.beginTransaction();
 
-            if (match != null) {
-                // Initialisation explicite des associations qui sont en Lazy Loading
-                Hibernate.initialize(match.getFinaliste());  // Initialiser le finaliste
-                Hibernate.initialize(match.getVainqueur()); // Initialiser le vainqueur
-                Hibernate.initialize(match.getEpreuve());    // Initialiser l'épreuve
-                Hibernate.initialize(match.getScore());      // Initialiser le score
+        // Requête HQL pour récupérer le match avec ses associations
+        match = session.get(Match.class, id);
 
-                // Initialisation des propriétés imbriquées de l'épreuve et du tournoi
-                if (match.getEpreuve() != null) {
-                    Hibernate.initialize(match.getEpreuve().getTournoi()); // Initialiser le tournoi de l'épreuve
-                    Hibernate.initialize(match.getEpreuve().getTournoi().getNom()); // Initialiser le nom du tournoi
-                }
+        if (match != null) {
 
-                // Initialisation de propriétés supplémentaires si nécessaire
-                Hibernate.initialize(match.getScore().getMatch());  // Initialiser le match dans le score
-                Hibernate.initialize(match.getScore().getMatch().getVainqueur());  // Initialiser le vainqueur dans le score
+            Hibernate.initialize(match.getFinaliste());
+            Hibernate.initialize(match.getVainqueur());
+            Hibernate.initialize(match.getEpreuve());
+            Hibernate.initialize(match.getScore());
+
+            // Initialisation des propriétés imbriquées de l'épreuve et du tournoi
+            if (match.getEpreuve() != null) {
+                Hibernate.initialize(match.getEpreuve().getTournoi()); // Initialiser le tournoi de l'épreuve
+                Hibernate.initialize(match.getEpreuve().getTournoi().getNom()); // Initialiser le nom du tournoi
             }
 
-            tx.commit();
-            System.out.println("Match récupéré et initialisé avec succès.");
+            // Initialisation de propriétés supplémentaires si nécessaire
+            Hibernate.initialize(match.getScore().getMatch());  // Initialiser le match dans le score
+            Hibernate.initialize(match.getScore().getMatch().getVainqueur());  // Initialiser le vainqueur dans le score
+            }
 
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
         return match;
     }
-
 
     public void create(Match match) {
         Session session = HibernateUtil.getSessionFactory().openSession();

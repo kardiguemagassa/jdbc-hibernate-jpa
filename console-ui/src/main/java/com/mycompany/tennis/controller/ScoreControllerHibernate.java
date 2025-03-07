@@ -17,10 +17,12 @@ public class ScoreControllerHibernate {
     }
 
     public void afficherScoreHibernate() {
+
         System.out.println("Quel est l'identifiant du Score dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
         scanner.nextLine();
         ScoreFullDto scoreFullDto = scoreServiceHibernate.getByScore(id);
+
         if (scoreFullDto != null) {
             System.out.println("Les sets du score : ");
             System.out.println("Set 1 : " + scoreFullDto.getSet1());
@@ -37,6 +39,7 @@ public class ScoreControllerHibernate {
         } else {
             System.out.println("Score non trouvé.");
         }
+
         System.out.println("Il s'agit du tournoi "+scoreFullDto.getMatch().getEpreuve().getTournoi().getNom());
         System.out.println("L'epreuve s'est déroulée en "+ scoreFullDto.getMatch().getEpreuve().getAnnee() + " et il s'agit d'une épreuve "
                 + (scoreFullDto.getMatch().getEpreuve().getTypeEpreuve().charValue() == 'H' ? "Homme" : "Femme"));

@@ -18,13 +18,21 @@ public class MatchControllerHibernate {
     }
 
     public void afficherDetailleMatchHibernate() {
+
         System.out.println("Quel est l'identifiant de match dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
         scanner.nextLine();
         MatchDto matchDto = matchServiceHibernate.getMatch(id);
-        System.out.println(String.format("Il s'agit d'un match de " + matchDto.getEpreuve().getAnnee() + " qui s'est déroulé à " + matchDto.getEpreuve().getTournoi().getNom()));
-        System.out.println(String.format("Le nom et le prenom du vainqueur sont " + matchDto.getVainqueur().getNom() + " " + matchDto.getVainqueur().getPrenom()));
-        System.out.println(String.format("Le nom et le prenom du finaliste " +  matchDto.getFinaliste().getNom() + " " + matchDto.getFinaliste().getPrenom()));
+
+        System.out.println(String.format("Il s'agit d'un match de " + matchDto.getEpreuve().getAnnee()
+                + " qui s'est déroulé à " + matchDto.getEpreuve().getTournoi().getNom()));
+
+        System.out.println(String.format("Le nom et le prenom du vainqueur sont " + matchDto.getVainqueur().getNom()
+                + " " + matchDto.getVainqueur().getPrenom()));
+
+        System.out.println(String.format("Le nom et le prenom du finaliste " +  matchDto.getFinaliste().getNom()
+                + " " + matchDto.getFinaliste().getPrenom()));
+
         System.out.println("Les sets du score sont " + matchDto.getScore().getSet1());
 
         if (matchDto.getScore() != null) {
@@ -46,23 +54,11 @@ public class MatchControllerHibernate {
     }
 
     public void tapisVert () {
+
         System.out.println("Quel est l'identifiant de match dont vous voulez annulez ?");
         long id = scanner.nextLong();
         matchServiceHibernate.tapisVert(id);
     }
-
-    /*public void afficherEpreuveHibernateRolangaros() {
-        System.out.println("Quel est l'identifiant de l'Epreuve dont vous voulez afficher les informations ?");
-        long id = scanner.nextLong();
-        scanner.nextLine();  // Consommer le newline après nextLong
-        EpreuveLightDto epreuveLightDto = epreuveServiceHibernate.getByIdSansTournoi(id);
-        if (epreuveLightDto != null) {
-            //System.out.println(String.format("L'Epreuve sélectionnée se déroule en " + epreuve.getAnnee() + " et il sagit du tournoi : %s", epreuve.getTournoi().getNom()));
-        } else {
-            System.out.println("Tournoi non trouvé.");
-        }
-    }*/
-
 
     public void ajouterMatchHibernate() {
 
@@ -119,16 +115,8 @@ public class MatchControllerHibernate {
         Tournoi tournoi = new Tournoi();
         tournoi.setNom(nom);
         tournoi.setCode(code);
-        //tournoiServiceHibernate.create(tournoi);
-        System.out.println("Le tournoi a été créé avec succès.");
-    }
 
-    public void supprimeTournoiHibernate() {
-        System.out.println("Quel est le match que vous voulez supprimer ?");
-        long id = scanner.nextLong();
-        scanner.nextLine();
-        matchServiceHibernate.delete(id);
-        //System.out.println("Le tournoi a été supprimé avec succès.");
+        System.out.println("Le tournoi a été créé avec succès.");
     }
 
     public void closeScanner() {
@@ -136,26 +124,5 @@ public class MatchControllerHibernate {
             scanner.close();
         }
     }
-
-    /*
-    public void renommeTournoiHibernate() {
-        System.out.println("Quel est l'identifiant du tournoi que vous voulez renommer ?");
-        long id = scanner.nextLong();
-        scanner.nextLine();  // Consommer le newline après nextLong
-        System.out.println("Quel est le nouveau nom ?");
-        String nom = scanner.nextLine();
-
-//        Tournoi tournoi = tournoiServiceHibernate.getById(id);
-//        if (tournoi != null) {
-//            tournoi.setNom(nom);  // Modifier le nom du tournoi
-//            tournoiServiceHibernate.update(tournoi);  // Sauvegarder la mise à jour
-//            System.out.println("Le tournoi a été renommé avec succès.");
-//        } else {
-//            System.out.println("Tournoi non trouvé.");
-//        }
-    }*/
-
-
-
 
 }
