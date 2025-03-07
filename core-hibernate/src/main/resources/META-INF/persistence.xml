@@ -3,20 +3,23 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="tennis-unit" transaction-type="RESOURCE_LOCAL">
+
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!--class>com.mycompany.tennis.core.entity.Joueur</class>
+        <non-jta-data-source>java:comp/env/jdbc/tennisDS</non-jta-data-source>
+
+        <class>com.mycompany.tennis.core.entity.Joueur</class>
         <class>com.mycompany.tennis.core.entity.Epreuve</class>
         <class>com.mycompany.tennis.core.entity.Match</class>
-        <class>com.mycompany.tennis.core.entity.Score</class>-->
+        <class>com.mycompany.tennis.core.entity.Score</class>
 		<class>com.mycompany.tennis.core.entity.Tournoi</class>
 
         <properties>
-            <!-- Configuring JDBC properties -->
+            <!-- Configuring JDBC properties
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jnesis_tennis?useSSL=false" />
             <property name="javax.persistence.jdbc.user" value="jnesis" />
-            <property name="javax.persistence.jdbc.password" value="jnesis" />
+            <property name="javax.persistence.jdbc.password" value="jnesis" /> -->
 
             <!-- Hibernate properties -->
             <property name="hibernate.show_sql" value="true" />
