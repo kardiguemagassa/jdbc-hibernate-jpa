@@ -9,11 +9,12 @@ public class DataSourceProvider {
     private static BasicDataSource singleDataSource;
 
     public static DataSource getSingleDataSourceInstance(){
-        if (singleDataSource==null){
-            singleDataSource=new BasicDataSource();
+        if (singleDataSource == null){
+            singleDataSource = new BasicDataSource();
             singleDataSource.setInitialSize(5);
-            singleDataSource.setUrl("jdbc:mysql://localhost:3306/jnesis_tennis?useSSL=false");
 
+            // Modifier l'URL de connexion en ajoutant allowPublicKeyRetrieval=true
+            singleDataSource.setUrl("jdbc:mysql://localhost:3306/jnesis_tennis?allowPublicKeyRetrieval=true&useSSL=false");
             singleDataSource.setUsername("jnesis");
             singleDataSource.setPassword("jnesis");
         }
