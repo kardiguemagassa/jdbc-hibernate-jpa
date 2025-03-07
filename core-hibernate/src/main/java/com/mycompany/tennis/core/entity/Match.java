@@ -1,6 +1,5 @@
 package com.mycompany.tennis.core.entity;
 
-
 import javax.persistence.*;
 
 @Entity

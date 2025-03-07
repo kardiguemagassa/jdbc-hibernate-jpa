@@ -1,6 +1,5 @@
 package com.mycompany.tennis.core.entity;
 
-
 import javax.persistence.*;
 
 @NamedQuery(query = "select j from Joueur j where j.sexe=:sexe", name = "given_sexe")

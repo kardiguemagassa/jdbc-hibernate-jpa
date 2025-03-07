@@ -28,17 +28,13 @@ public class JoueurControllerHibernate {
 
     }
 
-
     public void afficherJoueurHibernate() {
+
         System.out.println("Quel est l'identifiant du joueur dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
         scanner.nextLine();
         Joueur joueur = joueurServiceHibernate.getById(id);
-        if (joueur != null) {
-            System.out.println(String.format("Le joueur sélectionné s'appelle %s %s", joueur.getPrenom(), joueur.getNom()));
-        } else {
-            System.out.println("Joueur non trouvé.");
-        }
+        System.out.println(String.format("Le joueur sélectionné s'appelle %s %s", joueur.getPrenom(), joueur.getNom()));
     }
 
     public void creerJoueurHibernate() {
@@ -64,18 +60,10 @@ public class JoueurControllerHibernate {
         System.out.println("Quel est le nouveau nom ?");
         String nom = scanner.nextLine();
         joueurServiceHibernate.renomme(id,nom);
-
-        /*if (joueur != null) {
-            joueur.setNom(nom);
-            joueurServiceHibernate.renomme(id, nom);
-            System.out.println("Le joueur a été renommé avec succès.");
-        } else {
-            System.out.println("Joueur non trouvé.");
-        }*/
     }
 
-
     public void updateJoueurHibernate() {
+
         System.out.println("Quel est l'identifiant du joueur que vous voulez renommer ?");
         long id = scanner.nextLong();
         scanner.nextLine();
@@ -93,6 +81,7 @@ public class JoueurControllerHibernate {
     }
 
     public void supprimeJoueurHibernate() {
+
         System.out.println("Quel est l'identifiant du joueur à supprimer ?");
         long id = scanner.nextLong();
         scanner.nextLine();

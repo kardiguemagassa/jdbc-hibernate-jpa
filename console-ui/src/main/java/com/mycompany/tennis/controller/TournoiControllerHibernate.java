@@ -16,6 +16,7 @@ public class TournoiControllerHibernate {
     }
 
     public void afficherTournoiHibernate() {
+
         System.out.println("Quel est l'identifiant du Tournoi dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
         scanner.nextLine();  // Consommer le newline après nextLong
@@ -28,6 +29,7 @@ public class TournoiControllerHibernate {
     }
 
     public void creerTournoiHibernate() {
+
         System.out.println("Quel est le nom du tournoi ?");
         String nom = scanner.nextLine();
         System.out.println("Quel est le code du tournoi ?");
@@ -41,6 +43,7 @@ public class TournoiControllerHibernate {
     }
 
     public void renommeTournoiHibernate() {
+
         System.out.println("Quel est l'identifiant du tournoi que vous voulez renommer ?");
         long id = scanner.nextLong();
         scanner.nextLine();  // Consommer le newline après nextLong

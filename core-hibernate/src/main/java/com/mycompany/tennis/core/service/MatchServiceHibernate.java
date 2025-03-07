@@ -27,15 +27,15 @@ public class MatchServiceHibernate {
 
     }
 
-    public List<Tournoi> list() {
+    public List<Match> list() {
         Session session = null;
         Transaction tx = null;
-        List<Tournoi> tournois = null;
+        List<Match> matches = null;
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-           // tournois = tournoiRepositoryImpl.list();  // Retourner la liste récupérée depuis le repository
+            matches = matchRepository.list();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -44,13 +44,12 @@ public class MatchServiceHibernate {
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close();  // Fermeture de la session
+                session.close();
             }
         }
 
-        return tournois;
+        return matches;
     }
-
 
     public MatchDto getMatch(Long id) {
         Session session = null;
@@ -119,39 +118,8 @@ public class MatchServiceHibernate {
         return matchDto;
     }
 
-
-    public EpreuveLightDto getByIdSansTournoi(Long id) {
-        Session session = null;
-        Transaction tx = null;
-        Epreuve epreuve = null;
-        EpreuveLightDto epreuveLightDto = null;
-
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-           // epreuve = epreuveRepositoryImpl.getById(id);
-
-            epreuveLightDto = new EpreuveLightDto();
-            epreuveLightDto.setId(epreuve.getId());
-            epreuveLightDto.setAnnee(epreuve.getAnnee());
-            epreuveLightDto.setTypeEpreuve(epreuve.getTypeEpreuve());
-
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-
-        return epreuveLightDto;
-    }
-
     public void tapisVert(Long id) {
+
         Session session = null;
         Transaction tx = null;
         Match match = null;
@@ -186,18 +154,18 @@ public class MatchServiceHibernate {
             }
         } catch (Exception e) {
             if (tx != null) {
-                tx.rollback(); // Rollback en cas d'erreur
+                tx.rollback();
             }
             e.printStackTrace();
         } finally {
             if (session != null) {
-                session.close(); // Fermeture de la session
+                session.close();
             }
         }
     }
 
-
     public void create(MatchDto matchDto) {
+
         Session session = null;
         Transaction tx = null;
         Match match = null;

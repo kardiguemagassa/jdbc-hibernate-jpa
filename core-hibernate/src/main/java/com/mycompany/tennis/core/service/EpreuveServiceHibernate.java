@@ -54,7 +54,6 @@ public class EpreuveServiceHibernate {
                 epreuveFullDtos.add(epreuveFullDto);
             }
 
-
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -68,7 +67,6 @@ public class EpreuveServiceHibernate {
         }
         return epreuveFullDtos;
     }
-
 
     public EpreuveFullDto getEpreuveDetaillee(Long id) {
         Session session = null;
@@ -118,7 +116,6 @@ public class EpreuveServiceHibernate {
         return epreuveFullDto;
     }
 
-
     public EpreuveLightDto getByIdSansTournoi(Long id) {
         Session session = null;
         Transaction tx = null;
@@ -155,9 +152,9 @@ public class EpreuveServiceHibernate {
         Transaction tx = null;
 
         try {
-            session = HibernateUtil.getSessionFactory().openSession();  // Utilisation de openSession()
+            session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            //tournoiRepositoryImpl.create(tournoi);  // Ajouter le tournoi via le repository
+            //epreuveRepositoryImpl.(tournoi);  // Ajouter le tournoi via le repository
             tx.commit();
             System.out.println("Tournoi ajouté");
         } catch (Exception e) {
@@ -172,7 +169,6 @@ public class EpreuveServiceHibernate {
         }
     }
 
-
     public void update(Tournoi tournoi) {
         Session session = null;
         Transaction tx = null;
@@ -180,7 +176,7 @@ public class EpreuveServiceHibernate {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            //tournoiRepositoryImpl.update(tournoi);
+            //epreuveRepositoryImpl.update(tournoi);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -194,7 +190,6 @@ public class EpreuveServiceHibernate {
         }
     }
 
-
     public void delete(Long id) {
         Session session = null;
         Transaction tx = null;
@@ -202,7 +197,7 @@ public class EpreuveServiceHibernate {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            //tournoiRepositoryImpl.delete(id);
+            //epreuveRepositoryImpl.delete(id);
             tx.commit();
             System.out.println("Tournoi supprimé");
         } catch (Exception e) {

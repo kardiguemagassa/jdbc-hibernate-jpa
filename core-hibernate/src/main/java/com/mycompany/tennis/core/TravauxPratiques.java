@@ -1,4 +1,4 @@
-/*
+
 package com.mycompany.tennis.core;
 
 import com.mycompany.tennis.core.repository.TournoiRepositoryImpl;
@@ -13,4 +13,4 @@ public class TravauxPratiques {
                 +" nom: "+tournoi.getNom() +"code "+tournoi.getCode()));
     }
 }
-*/
+
