@@ -30,7 +30,7 @@ public class JoueurServiceHibernate {
         List<JoueurDto> joueurDtoList = new ArrayList<>();
 
         try {
-            //EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("tennis-unit");
+
             em = EntityManagerHolder.getCurrentEntityManager();
             tx = em.getTransaction();
             tx.begin();

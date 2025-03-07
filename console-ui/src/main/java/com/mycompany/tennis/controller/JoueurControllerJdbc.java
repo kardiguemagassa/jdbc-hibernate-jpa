@@ -18,7 +18,7 @@ public class JoueurControllerJdbc {
         System.out.println("Quel l'idenfiant du joueur dont vous voulez afficher les informations ?");
         long id = scanner.nextLong();
         Joueur joueur = joueurService.getById(id);
-        System.out.println(" Le joueur sélectionné s'appelle {}" + joueur.getPrenom() + " " + joueur.getNom());
+        System.out.println(" Le joueur sélectionné s'appelle " + joueur.getPrenom() + " " + joueur.getNom());
     }
 
     public void supprimerJoueur(){
